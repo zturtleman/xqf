@@ -1011,6 +1011,23 @@
 	</game>
 	<game>
 		<base>Q3_SERVER</base>
+		<type>SPEARMINT_SERVER</type>
+		<name>Spearmint</name>
+		<id>SPEARMINTS</id>
+		<qstat_str>SPEARMINTS</qstat_str>
+		<qstat_option>-spearmints</qstat_option>
+		<qstat_master_option>-spearmintm</qstat_master_option>
+		<icon>spearmint.xpm</icon>
+		<config_is_valid>config_is_valid_generic</config_is_valid>
+		<command>spearmint</command>
+		<default_home>~/.spearmint</default_home>
+		<prefs_load>q3_prefs_load_common</prefs_load>
+		<update_prefs>q3_update_prefs</update_prefs>
+		<main_mod>baseq3</main_mod>
+		<pd>spearmint_private</pd>
+	</game>
+	<game>
+		<base>Q3_SERVER</base>
 		<type>ALIENARENA_SERVER</type>
 		<name>Alien Arena</name>
 		<id>ALIENARENAS</id>

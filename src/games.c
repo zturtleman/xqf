@@ -76,8 +76,10 @@ static char* stringlist073[] = { "ZEQ2", NULL };
 static char* stringlist074[] = { "ZEQ2.i386", NULL };
 static char* stringlist075[] = { "base", NULL };
 static char* stringlist076[] = { "turtlearena", NULL };
-static char* stringlist077[] = { "arena", NULL };
-static char* stringlist078[] = { "alienarena", NULL };
+static char* stringlist077[] = { "baseq3", NULL };
+static char* stringlist078[] = { "spearmint", NULL };
+static char* stringlist079[] = { "arena", NULL };
+static char* stringlist080[] = { "alienarena", NULL };
 struct game games[] = {
 	{
 		.type                 = Q1_SERVER,
@@ -1451,6 +1453,37 @@ struct game games[] = {
 		.command              = stringlist076,
 	},
 	{
+		.type                 = SPEARMINT_SERVER,
+		.flags                = GAME_CONNECT | GAME_PASSWORD | GAME_RCON | GAME_QUAKE3_MASTERPROTOCOL | GAME_Q3COLORS,
+		.name                 = "Spearmint",
+		.default_port         = 27960,
+		.default_master_port  = 27950,
+		.id                   = "SPEARMINTS",
+		.qstat_str            = "SPEARMINTS",
+		.qstat_option         = "-spearmints",
+		.qstat_master_option  = "-spearmintm",
+		.icon                 = "spearmint.xpm",
+		.parse_player         = q3_parse_player,
+		.parse_server         = quake_parse_server,
+		.analyze_serverinfo   = q3_analyze_serverinfo,
+		.config_is_valid      = config_is_valid_generic,
+		.exec_client          = q3_exec,
+		.custom_cfgs          = quake_custom_cfgs,
+		.save_info            = quake_save_info,
+		.init_maps            = q3_init_maps,
+		.has_map              = quake_has_map,
+		.get_mapshot          = q3_get_mapshot,
+		.arch_identifier      = "version",
+		.identify_cpu         = identify_cpu,
+		.identify_os          = identify_os,
+		.prefs_load           = q3_prefs_load_common,
+		.update_prefs         = q3_update_prefs,
+		.default_home         = "~/.spearmint",
+		.pd                   = &spearmint_private,
+		.main_mod             = stringlist077,
+		.command              = stringlist078,
+	},
+	{
 		.type                 = ALIENARENA_SERVER,
 		.flags                = GAME_CONNECT | GAME_PASSWORD | GAME_RCON | GAME_QUAKE3_MASTERPROTOCOL | GAME_Q3COLORS,
 		.name                 = "Alien Arena",
@@ -1478,8 +1511,8 @@ struct game games[] = {
 		.update_prefs         = q3_update_prefs,
 		.default_home         = "~/.codered/",
 		.pd                   = &alienarena_private,
-		.main_mod             = stringlist077,
-		.command              = stringlist078,
+		.main_mod             = stringlist079,
+		.command              = stringlist080,
 	},
 	{
 		.type                 = GPS_SERVER,

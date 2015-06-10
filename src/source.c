@@ -1181,6 +1181,9 @@ static char *builtin_masters_update_info[] = {
 	"ADD TURTLEARENAS master://master.ioquake3.org master.ioquake3.org",
 	"ADD TURTLEARENAS master://dpmaster.deathmask.net dpmaster.deathmask.net",
 
+	"ADD SPEARMINTS master://master.ioquake3.org master.ioquake3.org",
+	"ADD SPEARMINTS master://dpmaster.deathmask.net dpmaster.deathmask.net",
+
 	"ADD ALIENARENAS master://master.corservers.com:27900 master.corservers.com",
 	"ADD ALIENARENAS master://master2.corservers.com:27900 master2.corservers.com",
 
@@ -1229,6 +1232,7 @@ static char *builtin_masters_update_info[] = {
 	"ADD ZEQ2LITES lan://255.255.255.255 LAN",
 	"DELETE TURTLEARENAS lan://255.255.255.255:27950 LAN",
 	"ADD TURTLEARENAS lan://255.255.255.255 LAN",
+	"ADD SPEARMINTS lan://255.255.255.255 LAN",
 	"ADD ALIENARENAS lan://255.255.255.255 LAN",
 
 	NULL

@@ -95,6 +95,7 @@
 #include "xpm/smokinguns.xpm"
 #include "xpm/zeq2lite.xpm"
 #include "xpm/turtlearena.xpm"
+#include "xpm/spearmint.xpm"
 #include "xpm/alienarena.xpm"
 
 #include "xpm/green-plus.xpm"
