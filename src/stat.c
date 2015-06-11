@@ -147,6 +147,28 @@ static int parse_master_output (char *str, struct stat_conn *conn) {
 	debug (6, "parse_master_output(%s,%p)",str,conn);
 	n = tokenize_bychar (str, token, 8, QSTAT_DELIM);
 
+	// check if qstat gave an error about an unknown command line argument
+	if (n == 1 && strncmp(token[0], "unknown option \"", 16) == 0) {
+		char *option = token[0] + 16;
+		size_t len = strlen(option);
+
+		if (len) {
+			option[len-1] = 0;
+		}
+
+		// check if option is master type or LAN type
+		if (strcmp(master_qstat_option(conn->master), option) == 0
+			|| strcmp(games[conn->master->type].qstat_option, option) == 0) {
+			xqf_error("qstat does not support %s (qstat option \"%s\")",
+					games[conn->master->type].name, option);
+		} else {
+			xqf_error("Unknown qstat option \"%s\"", option);
+		}
+
+		conn->master->state = SOURCE_ERROR;
+		return FALSE;
+	}
+
 	// UGLY HACK UGLY HACK UGLY HACK UGLY HACK
 	// output from UT 2003 http server is formatted as
 	// ip port gamespy_port
@@ -304,6 +326,8 @@ static gboolean stat_master_input_callback (GIOChannel *chan, GIOCondition condi
 		strncpy(conn->buf + (conn->bufsize - res), buf, res);
 		
 		if (status == G_IO_STATUS_EOF) {
+			gboolean unsuccessful = FALSE;
+
 			debug(3, "stat_master_input_callback -- eof");
 			debug(6, "conn->buf: [%d]", buf);
 
@@ -313,12 +337,19 @@ static gboolean stat_master_input_callback (GIOChannel *chan, GIOCondition condi
 			while (current) {
 				if (strlen(current->data)) {
 					debug(6, "parse_master_output: [%s]", current->data);
-					parse_master_output(current->data, conn);
+					if (!parse_master_output(current->data, conn)) {
+						unsuccessful = TRUE;
+					}
 				}
 				current = current->next;
 			}
 
-			stat_master_update_done (conn, job, conn->master, SOURCE_UP);
+			if (unsuccessful) {
+				stat_master_update_done (conn, job, conn->master, conn->master->state);
+			} else {
+				stat_master_update_done (conn, job, conn->master, SOURCE_UP);
+			}
+
 			stat_update_masters (job);
 			debug_decrease_indent();
 			g_free(buf);
@@ -985,7 +1016,8 @@ static struct stat_conn *start_qstat (struct stat_job *job, char *argv[], GIOFun
 	}
 	else {  /* child */
 		close (pipefds[0]);
-		dup2 (pipefds[1], 1);
+		dup2 (pipefds[1], STDOUT_FILENO);
+		dup2 (pipefds[1], STDERR_FILENO);
 		close (pipefds[1]);
 
 		execvp (argv[0], argv);
