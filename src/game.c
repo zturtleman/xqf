@@ -174,6 +174,7 @@ static struct quake_private quake4_private;
 static struct quake_private qw_private;
 static struct quake_private reaction_private;
 static struct quake_private smokinguns_private;
+static struct quake_private spearmint_private;
 static struct quake_private tremfusion_private;
 static struct quake_private tremulousgpp_private;
 static struct quake_private tremulous_private;
@@ -1843,6 +1844,8 @@ static void q3_analyze_serverinfo (struct server *s) {
 			}
 			// Spearmint
 			else if (!strncmp(info_ptr[1], "Spearmint", 9)) {
+				s->type=SPEARMINT_SERVER;
+
 				for (info_ptr = s->info; info_ptr && *info_ptr; info_ptr += 2) {
 					if (strcmp (*info_ptr, "gamename") == 0) {
 						// Turtle Arena
@@ -1899,7 +1902,7 @@ static void q3_analyze_serverinfo (struct server *s) {
 				strcmp (*info_ptr, "gametype") == 0) {
 			s->gametype = info_ptr[1];
 		}
-		else if (s->type == TURTLEARENA_SERVER &&
+		else if ((s->type == SPEARMINT_SERVER || s->type == TURTLEARENA_SERVER) &&
 				strcmp (*info_ptr, "sv_gametypeName") == 0) {
 			s->gametype = info_ptr[1];
 		}

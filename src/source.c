@@ -1126,6 +1126,10 @@ static char *builtin_masters_update_info[] = {
 	 *
 	 */
 
+	// added 2017-11-04
+	"ADD SPEARMINTS master://master.ioquake3.org master.ioquake3.org",
+	"ADD SPEARMINTS master://dpmaster.deathmask.net dpmaster.deathmask.net",
+
 	// added 2017-04-09
 	"ADD CODUOS http://www.qtracker.com/server_list_details.php?game=callofdutyunitedoffensive qtracker.com",
 	"ADD CODUOS master://codmaster.activision.com activision.com",
@@ -1379,6 +1383,7 @@ static char *builtin_masters_update_info[] = {
 	"ADD RUNESRV lan://255.255.255.255 LAN",
 	"ADD SFS lan://255.255.255.255 LAN",
 	"ADD SMOKINGUNSS lan://255.255.255.255 LAN",
+	"ADD SPEARMINTS lan://255.255.255.255 LAN",
 	"ADD T2S lan://255.255.255.255 LAN",
 	"ADD TREMFUSIONS lan://255.255.255.255 LAN",
 	"ADD TREMULOUSGPPS lan://255.255.255.255 LAN",

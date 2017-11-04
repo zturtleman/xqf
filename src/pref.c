@@ -636,6 +636,17 @@ static struct q3_common_prefs_s turtlearena_prefs = {
 	.defproto  = "11",
 };
 
+static const char* spearmint_masterprotocols[] = {
+	"auto",
+	"11 - v0.5",
+	NULL
+};
+
+static struct q3_common_prefs_s spearmint_prefs = {
+	.protocols = spearmint_masterprotocols,
+	.defproto  = "11",
+};
+
 static const char* alienarena_masterprotocols[] = {
 	"auto",
 	"34 - v7.66",
@@ -3216,6 +3227,7 @@ static struct q3_common_prefs_s* get_pref_widgets_for_game(enum server_type type
 		case SMOKINGUNS_SERVER: return &smokinguns_prefs;
 		case ZEQ2LITE_SERVER: return &zeq2lite_prefs;
 		case TURTLEARENA_SERVER: return &turtlearena_prefs;
+		case SPEARMINT_SERVER: return &spearmint_prefs;
 		case ALIENARENA_SERVER: return &alienarena_prefs;
 		default: xqf_error("need to define preferences"); return NULL;
 	}
@@ -4369,6 +4381,7 @@ static struct generic_prefs* new_generic_prefs (void) {
 	new_genprefs[SMOKINGUNS_SERVER].add_options_to_notebook = add_q3_options_to_notebook;
 	new_genprefs[ZEQ2LITE_SERVER].add_options_to_notebook = add_q3_options_to_notebook;
 	new_genprefs[TURTLEARENA_SERVER].add_options_to_notebook = add_q3_options_to_notebook;
+	new_genprefs[SPEARMINT_SERVER].add_options_to_notebook = add_q3_options_to_notebook;
 	new_genprefs[ALIENARENA_SERVER].add_options_to_notebook = add_q3_options_to_notebook;
 
 	for (i = 0; i < GAMES_TOTAL; i++) {
