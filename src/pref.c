@@ -1334,6 +1334,16 @@ static void get_new_defaults (void) {
 
 	config_pop_prefix();
 
+	g_free (sound_player);
+
+	g_free (sound_xqf_start);
+	g_free (sound_xqf_quit);
+	g_free (sound_update_done);
+	g_free (sound_refresh_done);
+	g_free (sound_stop);
+	g_free (sound_server_connect);
+	g_free (sound_redial_success);
+
 	/* These are set from chained calls to "activate" callbacks */
 
 	gtk_check_menu_item_set_active (
@@ -4114,7 +4124,11 @@ static GtkWidget *qstat_options_page (void) {
 void pref_sound_play (GtkWidget *dialog_button) {
 	const char *file   = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (dialog_button));
 	const char *player = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (sound_player_file_dialog_button));
+
 	play_sound_with (player, file, 1);
+
+	g_free (file);
+	g_free (player);
 }
 
 void pref_sound_conf_clear(GtkWidget *dialog_button) {
